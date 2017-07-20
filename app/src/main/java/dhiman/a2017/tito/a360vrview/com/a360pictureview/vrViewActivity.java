@@ -1,5 +1,5 @@
 package dhiman.a2017.tito.a360vrview.com.a360pictureview;
-/*Sample Code for VR */
+/*Sample Code for VR*/
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
