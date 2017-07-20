@@ -5,16 +5,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.ParcelFileDescriptor;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
@@ -25,7 +23,6 @@ import android.widget.Toast;
 import com.google.vr.sdk.widgets.pano.VrPanoramaView;
 
 import java.io.File;
-import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,6 +36,14 @@ public class vrViewActivity extends AppCompatActivity {
     private TextView fileName;
     private VrPanoramaView vrView;
     private VrPanoramaView.Options panoOptions = new VrPanoramaView.Options();
+
+    private static void openPermissionSettings(Activity activity) {
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                Uri.parse("package:" + activity.getPackageName()));
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        activity.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,13 +59,11 @@ public class vrViewActivity extends AppCompatActivity {
                         Manifest.permission.WRITE_EXTERNAL_STORAGE);
                 if(permissionCheck == PackageManager.PERMISSION_GRANTED)
                 {
-                    Log.d(TAG, "onClick: PERMISSION_GRANTED");
                     showFileChooser();
 
                 }
                 else
                 {
-                    Log.d(TAG, "onClick: requestFileWrite");
                     requestFileWrite();
                 }
             }
@@ -170,14 +173,6 @@ public class vrViewActivity extends AppCompatActivity {
                 // result of the request.
             }
         }
-    }
-
-    private static void openPermissionSettings(Activity activity) {
-        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                Uri.parse("package:" + activity.getPackageName()));
-        intent.addCategory(Intent.CATEGORY_DEFAULT);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        activity.startActivity(intent);
     }
 
     private void showFileChooser() {
