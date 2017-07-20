@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="dhiman.a2017.tito.a360vrview.com.a360pictureview.vrViewActivity">
+    <com.google.vr.sdk.widgets.pano.VrPanoramaView
+        android:id="@+id/vrView"
+        android:layout_width="match_parent"
+        android:scrollbars="@null"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/fileName" />
+
+    <Button
+        android:id="@+id/openFile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:text="Open File"
+        android:theme="@style/AppTheme.Button" />
+
+    <TextView
+        android:id="@+id/fileName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/openFile"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:ems="10"
+        android:hint="File Name"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
+</RelativeLayout>
